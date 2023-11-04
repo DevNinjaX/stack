@@ -1,66 +1,97 @@
-#include<stdio.h>
-#include<conio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <conio.h>
+#include <stdlib.h>
 
 // define global variable
-int max = 100;
-int stack[100];
-int index = -1;
+int max = 5;
+int stack[5];
+int pos = -1;
 
-// print method
+//print method
 void print(){
-	printf("\nSTACK elements are: ");
-	for(int i=0; i<=index; i++){
-		printf("%d ", stack[i]);
-	}
-	printf("\n\n");
+    for (int i = pos; i >= 0; i--)
+        {
+            if(i == pos)
+                printf("\033[1;32m-               -\033[0m\n");
+            if(i == 0){
+                printf("\033[1;32m |      %d      |\033[0m\n", stack[0]);
+                printf("\033[1;32m ---------------\033[0m\n");
+            }
+            else
+                printf("\033[1;32m |\t%d\t|\033[0m\n", stack[i]);
+        }
 }
+
 // push method
-void push(int val){
-	if(index != max-1){
-		index++;
-		stack[index] = val;
-	}
-	printf("\n\n");
+void push()
+{
+    int num;
+
+    printf("Enter the element: ");
+    scanf("%d", &num);
+    if(pos == max)
+    printf("\033[1;31mSTACK is OVERFLOW\033[0m");
+    else if (pos == max - 1)
+    {
+        printf("\033[1;33mSTACK FULL!!!\033[0m");
+        pos++;
+    }
+    else
+    {
+        pos++;
+        stack[pos] = num;
+        // print stack
+        print();
+    }
+    printf("\n");
 }
+
 // pop method
-int pop(){
-	printf("\nDelete element in the last index from STACK: ");
-	for(int i=0; i<index; i++){
-		printf("%d ", stack[i]);
-	}
-	index--;
-	printf("\n\n");
+int pop()
+{
+    printf("Elements are:\n");
+    if (pos < 0)
+        printf("\033[1;31mSTACK is UNDERFLOW\033[0m");
+    else if(pos == 0)
+    {
+        printf("\033[1;33mSTACK EMPTY!!!\033[0m");
+        pos--;
+    }
+    else
+    {
+        pos--;
+        print();
+    }
+    printf("\n");
 }
 
-int main(){
-	int ch, num;
-	
-	while(1){
-		printf("Press 1 for push\n");
-		printf("Press 2 for pop\n");
-		printf("Press 3 for print\n");
-		printf("Press 4 for exit\n");
-		scanf("%d", &ch);
-		switch(ch){
-			case 1:
-				printf("\nEnter the element: ");
-				scanf("%d",&num);
-				push(num);
-				break;
-			case 2:
-				pop();
-				break;
-			case 3:
-				print();
-				break;
-			case 4:
-				exit(1);
-				break;
-			default:
-				printf("Please fill the rite option");
-		}
-	}
-
-	return 0;
+int main()
+{
+    int ch;
+    printf("\033[1;31;47m STACK by KOUSHIK DEBNATH \033[0m\n");
+    while (1)
+    {
+        printf("Please select operation:\n");
+        printf("    1. PUSH\n");
+        printf("    2. POP\n");
+        printf("    3. EXIT\n");
+        printf("SELECTION: ");
+        scanf("%d", &ch);
+        switch (ch)
+        {
+        case 1:
+            push();
+            break;
+        case 2:
+            pop();
+            break;
+        case 3:
+            exit(1);
+            break;
+        default:
+            printf("Please fill the right option\n");
+        }
+    }
+    getch();
+    return 0;
 }
