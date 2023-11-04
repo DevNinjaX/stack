@@ -18,7 +18,7 @@ void print(){
                 printf("\033[1;32m ---------------\033[0m\n");
             }
             else
-                printf("\033[1;32m |\t%d\t|\033[0m\n", stack[i]);
+                printf("\033[1;32m |      %d      |\033[0m\n", stack[i]);
         }
 }
 
@@ -30,7 +30,7 @@ void push()
     printf("Enter the element: ");
     scanf("%d", &num);
     if(pos == max)
-    printf("\033[1;31mSTACK is OVERFLOW\033[0m");
+        printf("\033[1;31mSTACK is OVERFLOW\033[0m");
     else if (pos == max - 1)
     {
         printf("\033[1;33mSTACK FULL!!!\033[0m");
